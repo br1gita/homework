@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('data');
+            $table->string('date');
             $table->string('place');
             $table->longText('description');
             $table->timestamps();

@@ -18,13 +18,13 @@ class ConferenceSeeder extends Seeder
         (new Conference())->insert([
             [
                 'title' => Lorem::sentence(5),
-                'data' => Carbon::now()->addDays(rand(1, 365))->format('Y-m-d'),
+                'date' => Carbon::now()->addDays(rand(1, 365))->format('Y-m-d'),
                 'place' => Lorem::word(),
                 'description' => Lorem::text()
             ],
             [
                 'title' => Lorem::sentence(5),
-                'data' => Carbon::now()->addDays(rand(1, 365))->format('Y-m-d'),
+                'date' => Carbon::now()->addDays(rand(1, 365))->format('Y-m-d'),
                 'place' => Lorem::word(),
                 'description' => Lorem::text()
             ],
