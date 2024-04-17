@@ -13,7 +13,7 @@ Route::get('/conferences', [ConferenceController::class, 'index'])->name('home.i
 
 //create conference
 Route::get('/conferences/create', [ConferenceController::class, 'create'])->name('home.create')->middleware('auth');
-Route::post('conferences', [ConferenceController::class, 'store'])->name('home.store');
+Route::post('conferences/store', [ConferenceController::class, 'store'])->name('home.store');
 
 //Single conference
 Route::get('/conferences/{id}', [ConferenceController::class, 'show'])->name('home.show');
@@ -24,10 +24,6 @@ Route::delete('/conferences/{id}', [ConferenceController::class, 'destroy'])->na
 //update
 Route::get('/conferences/{id}/edit', [ConferenceController::class, 'edit'])->name('home.edit')->middleware('auth');
 Route::put('/conferences/{id}', [ConferenceController::class, 'update'])->name('home.update')->middleware('auth');
-
-
-
-
 
 Auth::routes();
 

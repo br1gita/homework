@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\Conference;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreConferenceRequest;
 
 class ConferenceController extends Controller
 {
     public function index()
     {
         return view('home.index', [
-            'heading' => 'List of conferences',
+            'heading' => 'LIST OF CONFERENCE',
             //'conferences' => Conference::orderBy('date')->get()
             //'conferences' => Conference::latest()->get()
             'conferences' => Conference::all()
@@ -28,18 +29,18 @@ class ConferenceController extends Controller
         return view('home.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreConferenceRequest $request, Conference $conference)
     {
-        $conferences = new Conference();
-        $conferences->title = $request->input('title');
-        $conferences->place = $request->input('place');
-        $conferences->description = $request->input('description');
+        $validated=$request->validated();
+        $conference->title = $validated['title'];
+        $conference->place = $validated['place'];
+        $conference->description = $validated['description'];
         $date = $request->input('year') . '-' . $request->input('month') . '-' . $request->input('day');
-        $conferences->date = $date;
+        $conference->date = $date;
 
-        $conferences->save();
-        //error_log($conferences);
-        return redirect('/')->with('msg', 'Conference was created successfully' );
+        $conference->save();
+
+        return redirect('/')->with('msg', 'Conference was created successfully');
     }
 
     public function destroy($id)
