@@ -7,7 +7,18 @@
         <p>Place: {{ $conference->place}}</p>
         <p>Date: {{ $conference->date}}</p>
     </div>
-    <a href="/conferences">Back to all conferences</a>
+    <form action="/conferences/{{$conference->id}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button>Delete</button>
+    </form>
+    <form action="/conferences/{{$conference->id}}/edit" method="PUT">
+        @csrf
+        @method('UPDATE')
+        <button>Edit</button>
+    </form>
+
+    <a href="{{route('home.index')}}">Back to all conferences</a>
 
 @endsection
 

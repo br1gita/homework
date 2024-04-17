@@ -27,4 +27,49 @@ class ConferenceController extends Controller
     {
         return view('home.create');
     }
+
+    public function store(Request $request)
+    {
+        $conferences = new Conference();
+        $conferences->title = $request->input('title');
+        $conferences->place = $request->input('place');
+        $conferences->description = $request->input('description');
+        $date = $request->input('year') . '-' . $request->input('month') . '-' . $request->input('day');
+        $conferences->date = $date;
+
+        $conferences->save();
+        //error_log($conferences);
+        return redirect('/')->with('msg', 'Conference was created successfully' );
+    }
+
+    public function destroy($id)
+    {
+        $conferences = Conference::findOrFail($id);
+        $conferences->delete();
+
+        return redirect('/conferences');
+    }
+
+    public function edit($id)
+    {
+        $conference = Conference::findOrFail($id);
+        return view('home.edit', compact('conference'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Retrieve the conference
+        $conference = Conference::findOrFail($id);
+
+        // Update conference details
+        $conference->title = $request->input('title');
+        $conference->place = $request->input('place');
+        $conference->description = $request->input('description');
+        $conference->date = $request->input('date');
+        $conference->save();
+
+        // Redirect back with success message
+        return redirect('/conferences');
+    }
+
 }

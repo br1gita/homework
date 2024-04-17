@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <h1>Create a new conference</h1>
-        <form action="/conference" method="POST">
+        <form action="/conferences" method="POST">
             @csrf
             <div>
                 <label for="title">Conference Name:</label>
@@ -16,19 +16,19 @@
                 <textarea id="description" name="description"></textarea>
 
                 <label for="date">Date:</label>
+                <select name="year" id="year">
+                    @for ($i = date('Y'); $i <= date('Y') + 10; $i++)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
                 <select name="month" id="month">
                     @for ($i = 1; $i <= 12; $i++)
-                        <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 1)) }}</option>
+                        <option value="{{ sprintf('%02d', $i) }}">{{ sprintf('%02d', $i) }}</option>
                     @endfor
                 </select>
                 <select name="day" id="day">
                     @for ($i = 1; $i <= 31; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                    @endfor
-                </select>
-                <select name="year" id="year">
-                    @for ($i = date('Y'); $i <= date('Y') + 10; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
+                        <option value="{{ sprintf('%02d', $i) }}">{{ sprintf('%02d', $i) }}</option>
                     @endfor
                 </select>
             </div>
