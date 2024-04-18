@@ -3,7 +3,7 @@
 @section('content')
     <div style="text-align: center;">
         <h1>{{$heading}}</h1>
-
+        <p class="msg">{{ session('msg') }}</p>
         @if(count($conferences)==0)
             <p>No conferences at the moment</p>
         @endif

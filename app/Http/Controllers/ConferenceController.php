@@ -31,6 +31,7 @@ class ConferenceController extends Controller
 
     public function store(StoreConferenceRequest $request, Conference $conference)
     {
+
         $validated=$request->validated();
         $conference->title = $validated['title'];
         $conference->place = $validated['place'];
@@ -70,7 +71,7 @@ class ConferenceController extends Controller
         $conference->save();
 
         // Redirect back with success message
-        return redirect('/conferences');
+        return redirect('/conferences')->with('msg', 'Conference was updated successfully');
     }
 
 }
